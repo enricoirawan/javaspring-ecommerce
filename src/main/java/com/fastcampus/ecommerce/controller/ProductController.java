@@ -1,7 +1,7 @@
 package com.fastcampus.ecommerce.controller;
 
-import com.fastcampus.ecommerce.Model.ProductRequest;
-import com.fastcampus.ecommerce.Model.ProductResponse;
+import com.fastcampus.ecommerce.model.ProductRequest;
+import com.fastcampus.ecommerce.model.ProductResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

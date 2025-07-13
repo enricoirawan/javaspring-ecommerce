@@ -1,4 +1,4 @@
-package com.fastcampus.ecommerce.Model;
+package com.fastcampus.ecommerce.model;
 
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package com.fastcampus.ecommerce.config.middleware;
 
-import com.fastcampus.ecommerce.Model.ErrorResponse;
+import com.fastcampus.ecommerce.model.ErrorResponse;
 import com.fastcampus.ecommerce.common.errors.BadRequestException;
 import com.fastcampus.ecommerce.common.errors.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;

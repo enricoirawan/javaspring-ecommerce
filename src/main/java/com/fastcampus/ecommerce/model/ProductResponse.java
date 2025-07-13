@@ -1,4 +1,4 @@
-package com.fastcampus.ecommerce.Model;
+package com.fastcampus.ecommerce.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
