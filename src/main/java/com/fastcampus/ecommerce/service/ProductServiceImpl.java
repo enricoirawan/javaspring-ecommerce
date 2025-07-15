@@ -68,8 +68,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponse create(ProductRequest productRequest) {
-        log.info("MASUK A");
+    public ProductResponse create(ProductRequest productRequest, Long userId) {
         List<Category> categories = getCategoriesByIds(productRequest.getCategoryIds());
         Product product = Product.builder()
                 .name(productRequest.getName())
@@ -77,10 +76,11 @@ public class ProductServiceImpl implements ProductService {
                 .price(productRequest.getPrice())
                 .stockQuantity(productRequest.getStockQuantity())
                 .weight(productRequest.getWeight())
+                .userId(userId)
+//                .userId(productRequest.getUser().getUserId())
                 .build();
         Product createdProduct = productRepository.save(product);
 
-        log.info("MASUK B");
         List<ProductCategory> productCategories = categories.stream()
                 .map(category -> {
                     ProductCategory productCategory = ProductCategory.builder().build();
@@ -91,8 +91,6 @@ public class ProductServiceImpl implements ProductService {
                     return productCategory;
                 }).toList();
         productCategoryRepository.saveAll(productCategories);
-
-        log.info("MASUK C");
         List<CategoryResponse> categoryResponseList = categories.stream().map(CategoryResponse::fromCategory).toList();
         return ProductResponse.fromProductAndCategories(createdProduct, categoryResponseList);
     }

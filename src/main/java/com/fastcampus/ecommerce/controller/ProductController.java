@@ -1,9 +1,8 @@
 package com.fastcampus.ecommerce.controller;
 
-import com.fastcampus.ecommerce.model.PaginatedProductResponse;
-import com.fastcampus.ecommerce.model.ProductRequest;
-import com.fastcampus.ecommerce.model.ProductResponse;
+import com.fastcampus.ecommerce.model.*;
 import com.fastcampus.ecommerce.service.ProductService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,15 +11,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("products")
 @RequiredArgsConstructor
+@RequestMapping("products")
+@SecurityRequirement(name = "Bearer")
 public class ProductController {
     private final ProductService productService;
 
@@ -62,7 +63,12 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<ProductResponse> createProduct(@RequestBody @Valid ProductRequest productRequest) {
-        ProductResponse productResponse = productService.create(productRequest);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserInfo userInfo = (UserInfo) authentication.getPrincipal();
+//        productRequest.setUser(userInfo.getUser());
+
+        ProductResponse productResponse = productService.create(productRequest, userInfo.getUser().getUserId());
+
         return ResponseEntity.status(HttpStatus.CREATED).body(productResponse);
     }
 

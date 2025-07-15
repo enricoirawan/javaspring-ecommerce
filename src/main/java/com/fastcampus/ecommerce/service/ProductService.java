@@ -13,7 +13,8 @@ public interface ProductService {
     Page<ProductResponse> findByPage(Pageable pageable);
     Page<ProductResponse> findByNameAndPageable(String name, Pageable pageable);
     ProductResponse findById(Long id);
-    ProductResponse create(ProductRequest productRequest);
+//    ProductResponse create(ProductRequest productRequest);
+    ProductResponse create(ProductRequest productRequest, Long userId);
     ProductResponse update(Long id, ProductRequest productRequest);
     void delete(Long id);
     PaginatedProductResponse convertProductPage(Page<ProductResponse> responses);

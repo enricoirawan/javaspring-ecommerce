@@ -1,6 +1,7 @@
 package com.fastcampus.ecommerce.model;
 
 import com.fastcampus.ecommerce.entity.Product;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,11 @@ public class ProductResponse {
     private String description;
     private Integer stockQuantity;
     private BigDecimal weight;
+
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
     private LocalDateTime createdAt;
+
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
     private LocalDateTime updatedAt;
     private List<CategoryResponse> categories;
 
