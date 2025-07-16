@@ -3,6 +3,7 @@ package com.fastcampus.ecommerce.config;
 import com.fastcampus.ecommerce.config.middleware.JwtAuthenticationFilter;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;

@@ -1,5 +1,6 @@
 package com.fastcampus.ecommerce.controller;
 
+import com.fastcampus.ecommerce.common.PageUtil;
 import com.fastcampus.ecommerce.model.*;
 import com.fastcampus.ecommerce.service.ProductService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -38,17 +39,7 @@ public class ProductController {
             @RequestParam(defaultValue = "product_id,asc") String[] sort,
             @RequestParam(required = false) String name
     ) {
-        List<Sort.Order> orders = new ArrayList<>();
-
-        if(sort[0].contains(",")){
-           for (String sortOrder: sort) {
-               String[] _sort = sortOrder.split(",");
-               orders.add(new Sort.Order(getSortDirection(_sort[1]), _sort[0]));
-           }
-        } else {
-            orders.add(new Sort.Order(getSortDirection(sort[1]), sort[0]));
-        }
-
+        List<Sort.Order> orders = PageUtil.parseSortOrderRequest(sort);
         Pageable pageable = PageRequest.of(page, size, Sort.by(orders));
 
         Page<ProductResponse> productResponse;

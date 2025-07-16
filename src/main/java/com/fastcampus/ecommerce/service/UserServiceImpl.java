@@ -41,7 +41,6 @@ public class UserServiceImpl implements UserService {
             throw new BadRequestException("Password confirmation doesn't match");
         }
 
-        log.info("MASUK A");
         String encodedPassword = passwordEncoder.encode(registerRequest.getPassword());
         User user = User.builder()
                 .username(registerRequest.getUsername())
